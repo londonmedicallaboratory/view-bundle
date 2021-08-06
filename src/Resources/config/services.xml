@@ -6,6 +6,8 @@
 
     <services>
 
+        <service id="lml_view.cache_wrapper" class="LML\View\ViewFactory\CacheWrapper" />
+        <service id="lml_view.view_factory_collection" class="LML\View\ViewFactory\ViewFactoryCollection" />
 
     </services>
 </container>

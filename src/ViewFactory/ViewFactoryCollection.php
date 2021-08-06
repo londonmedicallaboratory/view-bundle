@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ServiceLocator;
  *
  * Selected tag is interface name.
  */
-class ViewFactoriesCollection
+class ViewFactoryCollection
 {
     /**
      * @param ServiceLocator<ViewFactoryInterface> $tagged

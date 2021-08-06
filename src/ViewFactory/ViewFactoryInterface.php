@@ -9,7 +9,7 @@ namespace LML\View\ViewFactory;
  * @template-covariant  R
  * @template O of array
  *
- * @see ViewFactoriesCollection
+ * @see ViewFactoryCollection
  */
 interface ViewFactoryInterface
 {

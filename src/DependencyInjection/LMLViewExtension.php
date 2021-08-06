@@ -10,6 +10,8 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
+use Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
 
@@ -24,17 +26,20 @@ class LMLViewExtension extends ConfigurableExtension implements CompilerPassInte
 
     public function process(ContainerBuilder $container): void
     {
-        $repos = $container->findTaggedServiceIds('lml_sdk.repository');
-        foreach ($repos as $id => $_repo) {
-            $definition = $container->getDefinition((string)$id);
-            $definition->addMethodCall('setClient', [new Reference('lml_api.client')]);
-            $definition->addMethodCall('setIdentityMap', [new Reference('lml_api.identity_map')]);
-        }
+        $collection = $container->getDefinition('lml_view.view_factory_collection');
+        $collection->setArgument(0, new ServiceLocatorArgument(new TaggedIteratorArgument('lml_view.factory', null, 'default', true)));
+
+
     }
 
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
-        $container->registerForAutoconfiguration(ViewFactoryInterface::class)->addTag('lml_view.factory');
+
+//        $cache = $container->getDefinition('Symfony\\Contracts\\Cache\\TagAwareCacheInterface $fixturewrtertwerterwtes');
+
+        $container->registerForAutoconfiguration(ViewFactoryInterface::class)->addTag('lml_view.factory')
+            ->addMethodCall('setViewFactoriesCollection', [new Reference('lml_view.view_factory_collection')])
+            ->addMethodCall('setCacheWrapper', [new Reference('lml_view.cache_wrapper')]);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
@@ -51,7 +56,7 @@ class LMLViewExtension extends ConfigurableExtension implements CompilerPassInte
             return;
         }
         foreach ($container->getDefinitions() as $id => $definition) {
-            if (str_starts_with((string)$id, 'lml_view')) {
+            if (str_starts_with((string)$id, 'lml_view.')) {
                 $definition->setPublic(true);
             }
         }

@@ -11,7 +11,6 @@ use Pagerfanta\Pagerfanta;
 use LML\View\Context\CacheContext;
 use LML\View\Context\CacheableInterface;
 use LML\View\Pagination\QueryViewAdapter;
-use Symfony\Contracts\Service\Attribute\Required;
 
 /**
  * Abstract factory to create view classes from entities.
@@ -30,11 +29,9 @@ use Symfony\Contracts\Service\Attribute\Required;
  */
 abstract class AbstractViewFactory implements ViewFactoryInterface
 {
-    #[Required]
-    public ?ViewFactoriesCollection $viewFactoriesCollection = null;
+    private ?ViewFactoryCollection $viewFactoriesCollection = null;
 
-    #[Required]
-    public ?CacheWrapper $cacheWrapper = null;
+    private ?CacheWrapper $cacheWrapper = null;
 
     public static function getDefaultName(): string
     {
@@ -82,6 +79,16 @@ abstract class AbstractViewFactory implements ViewFactoryInterface
         $pagerfanta->setCurrentPage($page);
 
         return $pagerfanta;
+    }
+
+    public function setViewFactoriesCollection(ViewFactoryCollection $viewFactoriesCollection): void
+    {
+        $this->viewFactoriesCollection = $viewFactoriesCollection;
+    }
+
+    public function setCacheWrapper(CacheWrapper $cacheWrapper): void
+    {
+        $this->cacheWrapper = $cacheWrapper;
     }
 
     /**
