@@ -1,0 +1,17 @@
+<?php
+
+namespace Symfony\Contracts\Cache;
+
+use Psr\Cache\InvalidArgumentException;
+use Symfony\Contracts\Cache\ItemInterface;
+
+interface TagAwareCacheInterface extends CacheInterface
+{
+    /**
+     * @template R
+     * @param \Closure(ItemInterface $item): R $callback
+     *
+     * @return R
+     */
+    public function get(string $key, $callback, float $beta = null, array &$metadata = null);
+}

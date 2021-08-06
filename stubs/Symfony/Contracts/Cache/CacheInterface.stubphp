@@ -1,0 +1,18 @@
+<?php
+
+namespace Symfony\Contracts\Cache;
+
+use Psr\Cache\CacheItemInterface;
+use Psr\Cache\InvalidArgumentException;
+use Symfony\Contracts\Cache\ItemInterface;
+
+interface CacheInterface
+{
+    /**
+     * @template R
+     * @param callable|CallbackInterface(CacheItemInterface $item): R $callback
+     *
+     * @return R
+     */
+    public function get(string $key, $callback, float $beta = null, array &$metadata = null);
+}
