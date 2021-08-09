@@ -9,8 +9,10 @@
 >
     <projectFiles>
         <directory name="src" />
+        <directory name="tests" />
         <ignoreFiles>
             <directory name="vendor" />
+            <file name="src/DependencyInjection/Configuration.php" />
         </ignoreFiles>
     </projectFiles>
 
@@ -21,4 +23,8 @@
         <file name="stubs/Symfony/Contracts/Cache/CacheInterface.stubphp"/>
         <file name="stubs/Symfony/Contracts/Cache/TagAwareCacheInterface.stubphp"/>
     </stubs>
+
+    <plugins>
+        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin" />
+    </plugins>
 </psalm>

@@ -1,18 +1,20 @@
-framework:
-    test: true
-    cache:
-        pools:
-            fixturewrtertwerterwtes:
-                tags: true
-
 services:
     _defaults:
         autowire: true
         autoconfigure: true
 
-    LML\View\Tests\Fixture\ProductViewFactoryFixture:
+    LML\View\Tests\Fixture\ViewFactory\ProductViewFactoryFixture:
+
+
+framework:
+    test: true
+    cache:
+        pools:
+            test_pool:
+                tags: true
 
 lml_view:
-    cache_pool: fixturewrtertwerterwtes
+    cache_pool: test_pool
+
 
 

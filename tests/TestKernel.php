@@ -9,8 +9,10 @@ use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
-class TestKernel extends Kernel
+class TestKernel extends Kernel implements CompilerPassInterface
 {
     use MicroKernelTrait;
 
@@ -25,8 +27,17 @@ class TestKernel extends Kernel
         yield new LMLViewBundle();
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(__DIR__ . '/config/test_config.yaml');
+    }
+
+    public function process(ContainerBuilder $container): void
+    {
+        foreach ($container->getDefinitions() as $id => $definition) {
+            if (str_starts_with((string)$id, 'lml_view.')) {
+                $definition->setPublic(true);
+            }
+        }
     }
 }

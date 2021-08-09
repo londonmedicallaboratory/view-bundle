@@ -5,20 +5,35 @@ declare(strict_types=1);
 namespace LML\View\Tests;
 
 use LML\View\ViewFactory\ViewFactoryCollection;
-use LML\View\Tests\Fixture\ProductViewFactoryFixture;
+use LML\View\Tests\Fixture\View\ProductFixtureView;
+use LML\View\Tests\Fixture\Entity\ProductFixtureEntity;
+use LML\View\Tests\Fixture\ViewFactory\ProductViewFactoryFixture;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * @psalm-suppress MissingDependency
+ */
 class CollectionTest extends KernelTestCase
 {
-    public function testIsInitialized(): void
+    public function testBuildOne(): void
     {
         self::bootKernel();
-        return;
+
+        /** @var ProductViewFactoryFixture $viewFactory */
+        $viewFactory = self::getContainer()->get(ProductViewFactoryFixture::class);
+        self::assertInstanceOf(ProductViewFactoryFixture::class, $viewFactory);
+
+        $entity = new ProductFixtureEntity('Test', 42);
+        $view = $viewFactory->buildOne($entity);
+        self::assertInstanceOf(ProductFixtureView::class, $view);
+    }
+
+    public function testCollectionInitialization(): void
+    {
+        self::bootKernel();
 
         /** @var ViewFactoryCollection $collection */
         $collection = self::$kernel->getContainer()->get('lml_view.view_factory_collection');
-
-        $viewFactory = $collection->get(ProductViewFactoryFixture::class);
-        self::assertInstanceOf(ProductViewFactoryFixture::class, $viewFactory);
+        self::assertInstanceOf(ViewFactoryCollection::class, $collection);
     }
 }

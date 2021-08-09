@@ -15,17 +15,20 @@ use LML\View\ViewFactory\ViewFactoryInterface;
  *
  * Accepts regular query but instead of entities, makes iterable of view classes.
  *
- * @template T
- * @template R
- * @template O of array
+ * @template TEntity
+ * @template TView
+ * @template TOptions of array
  */
 class QueryViewAdapter extends QueryAdapter
 {
+    /**
+     * @var ?list<TView>
+     */
     private ?array $views = null;
 
     /**
-     * @param ViewFactoryInterface<T, R, O> $viewFactory
-     * @param O $options
+     * @param ViewFactoryInterface<TEntity, TView, TOptions> $viewFactory
+     * @param TOptions $options
      */
     public function __construct(Query $query, private ViewFactoryInterface $viewFactory, private $options = [])
     {
@@ -33,7 +36,7 @@ class QueryViewAdapter extends QueryAdapter
     }
 
     /**
-     * @return ArrayIterator<array-key, R>
+     * @return ArrayIterator<array-key, TView>
      */
     public function getSlice(int $offset, int $length): iterable
     {
@@ -44,7 +47,7 @@ class QueryViewAdapter extends QueryAdapter
     }
 
     /**
-     * @return list<R>
+     * @return list<TView>
      */
     private function doGetSlice(int $offset, int $length)
     {

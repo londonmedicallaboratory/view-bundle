@@ -5,28 +5,27 @@ declare(strict_types=1);
 namespace LML\View\ViewFactory;
 
 /**
- * @template T
- * @template-covariant  R
- * @template O of array
+ * @template TEntity
+ * @template-covariant TView
+ * @template TOptions of array
  *
  * @see ViewFactoryCollection
  */
 interface ViewFactoryInterface
 {
     /**
-     * @param T $entity
-     * @param O $options
+     * @param TEntity $entity
+     * @param TOptions $options
      *
-     * @return R
+     * @return TView
      */
     public function buildOne($entity, $options = []);
 
     /**
-     * @param iterable<T> $entities
-     * @param O $options
+     * @param iterable<TEntity> $entities
+     * @param TOptions $options
      *
-     * @return list<R>
+     * @return list<TView>
      */
     public function build(iterable $entities, $options = []);
-
 }

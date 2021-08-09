@@ -1,4 +1,10 @@
+# See https://github.com/londonmedicallaboratory/view-bundle for latest version
+
+framework:
+    cache:
+        pools:
+            view_cache_pool:    # default pool name; use redis if possible
+                tags: true      # adapter must allow tagging items
+
 lml_view:
-#    base_url: 'base_url_or_env'
-#    username: 'username_or_env'
-#    password: 'password_or_env'
+    cache_pool: view_cache_pool # this is the name of your pool

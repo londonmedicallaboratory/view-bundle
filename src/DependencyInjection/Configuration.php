@@ -11,7 +11,7 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('lml_sdk');
+        $treeBuilder = new TreeBuilder('lml_view');
         $treeBuilder->getRootNode()
             ->children()
                 ->scalarNode('cache_pool')->isRequired()->end()
