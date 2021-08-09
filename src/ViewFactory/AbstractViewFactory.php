@@ -69,7 +69,7 @@ abstract class AbstractViewFactory implements ViewFactoryInterface
      *
      * @return Pagerfanta<TView>
      */
-    final public function paginateFromQuery(Query $query, int $page, $options = [], int $maxPerPage = 10): Pagerfanta
+    final public function paginate(Query $query, int $page, $options = [], int $maxPerPage = 10): Pagerfanta
     {
         $adapter = new QueryViewAdapter($query, $this, $options);
 
