@@ -6,6 +6,7 @@ namespace LML\View\Tests;
 
 use LML\View\ViewFactory\ViewFactoryCollection;
 use LML\View\Tests\Fixture\View\ProductFixtureView;
+use LML\View\Tests\Fixture\View\CategoryFixtureView;
 use LML\View\Tests\Fixture\Entity\ProductFixtureEntity;
 use LML\View\Tests\Fixture\ViewFactory\ProductViewFactoryFixture;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -24,8 +25,12 @@ class CollectionTest extends KernelTestCase
         self::assertInstanceOf(ProductViewFactoryFixture::class, $viewFactory);
 
         $entity = new ProductFixtureEntity('Test', 42);
+        /** @var ProductFixtureView $view */
         $view = $viewFactory->buildOne($entity);
         self::assertInstanceOf(ProductFixtureView::class, $view);
+
+        $category = $view->getCategory();
+        self::assertInstanceOf(CategoryFixtureView::class, $category);
     }
 
     public function testCollectionInitialization(): void

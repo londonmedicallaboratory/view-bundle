@@ -4,6 +4,7 @@ services:
         autoconfigure: true
 
     LML\View\Tests\Fixture\ViewFactory\ProductViewFactoryFixture:
+    LML\View\Tests\Fixture\ViewFactory\CategoryViewFactoryFixture:
 
 
 framework:
