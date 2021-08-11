@@ -9,7 +9,7 @@ use Closure;
 /**
  * @template T
  */
-class LazyValue
+class LazyValue implements LazyValueInterface
 {
     /**
      * @var Store<T>|null
