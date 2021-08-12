@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace LML\View\Tests;
 
 use LML\View\ViewFactory\ViewFactoryCollection;
-use LML\View\Tests\Fixture\View\ProductFixtureView;
-use LML\View\Tests\Fixture\View\CategoryFixtureView;
-use LML\View\Tests\Fixture\Entity\ProductFixtureEntity;
-use LML\View\Tests\Fixture\ViewFactory\ProductViewFactoryFixture;
+use LML\View\Tests\Fixture\View\UserView;
+use LML\View\Tests\Fixture\View\VideoView;
+use LML\View\Tests\Fixture\Entity\User;
+use LML\View\Tests\Fixture\ViewFactory\UserViewFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
@@ -20,17 +20,17 @@ class CollectionTest extends KernelTestCase
     {
         self::bootKernel();
 
-        /** @var ProductViewFactoryFixture $viewFactory */
-        $viewFactory = self::getContainer()->get(ProductViewFactoryFixture::class);
-        self::assertInstanceOf(ProductViewFactoryFixture::class, $viewFactory);
+        /** @var UserViewFactory $viewFactory */
+        $viewFactory = self::getContainer()->get(UserViewFactory::class);
+        self::assertInstanceOf(UserViewFactory::class, $viewFactory);
 
-        $entity = new ProductFixtureEntity('Test', 42);
-        /** @var ProductFixtureView $view */
+        $entity = new User('Test', 42);
+        /** @var UserView $view */
         $view = $viewFactory->buildOne($entity);
-        self::assertInstanceOf(ProductFixtureView::class, $view);
+        self::assertInstanceOf(UserView::class, $view);
 
         $category = $view->getCategory();
-        self::assertInstanceOf(CategoryFixtureView::class, $category);
+        self::assertInstanceOf(VideoView::class, $category);
     }
 
     public function testCollectionInitialization(): void

@@ -9,8 +9,8 @@ use Traversable;
 use RuntimeException;
 use Doctrine\ORM\Query;
 use Pagerfanta\Pagerfanta;
-use LML\View\Lazy\LazyValue;
 use LML\View\Context\CacheContext;
+use LML\View\Lazy\LazyValueInterface;
 use LML\View\Context\CacheableInterface;
 use LML\View\Pagination\QueryViewAdapter;
 use function iterator_to_array;
@@ -19,9 +19,13 @@ use function iterator_to_array;
  * @template TEntity
  * @template-covariant TView
  * @template TOptions of array
- * @template TOptimizer
+ * @template TOptimizer of array
  *
  * @implements ViewFactoryInterface<TEntity, TView, TOptions>
+ *
+ * TOptimizer should be array<string, LazyValueInterface>
+ *
+ * @see LazyValueInterface
  */
 abstract class AbstractViewFactory implements ViewFactoryInterface
 {
@@ -42,7 +46,7 @@ abstract class AbstractViewFactory implements ViewFactoryInterface
      */
     final public function buildOne($entity, $options = [])
     {
-        $optimizer = new LazyValue(fn() => $this->createOptimizerWrapper([$entity], $options));
+        $optimizer = $this->createOptimizerWrapper([$entity], $options);
 
         return $this->one($entity, $options, $optimizer);
     }
@@ -56,7 +60,7 @@ abstract class AbstractViewFactory implements ViewFactoryInterface
     final public function build(iterable $entities, $options = [])
     {
         $results = [];
-        $optimizer = new LazyValue(fn() => $this->createOptimizerWrapper($entities, $options));
+        $optimizer = $this->createOptimizerWrapper($entities, $options);
         foreach ($entities as $entity) {
             $results[] = $this->one($entity, $options, $optimizer);
         }
@@ -93,11 +97,11 @@ abstract class AbstractViewFactory implements ViewFactoryInterface
     /**
      * @param TEntity $entity
      * @param TOptions $options
-     * @param LazyValue<TOptimizer> $optimizer
+     * @param TOptimizer $optimizer
      *
      * @return TView
      */
-    abstract protected function one($entity, $options, LazyValue $optimizer);
+    abstract protected function one($entity, $options, $optimizer);
 
     /**
      * @template TViewFactory of ViewFactoryInterface

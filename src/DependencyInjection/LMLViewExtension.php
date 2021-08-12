@@ -54,5 +54,4 @@ class LMLViewExtension extends ConfigurableExtension
         $container->getDefinition('lml_view.view_factory_collection')
             ->setArgument(0, new ServiceLocatorArgument(new TaggedIteratorArgument('lml_view.factory', null, 'default', true)));
     }
-
 }

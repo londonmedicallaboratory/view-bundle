@@ -2,13 +2,18 @@
 
 declare(strict_types=1);
 
-namespace LML\View\Tests\Fixture\Entity;
+namespace LML\View\Tests\Fixture\View;
 
-class ProductFixtureEntity
+use LML\View\Lazy\LazyValue;
+
+class UserView
 {
+    /**
+     * @param LazyValue<VideoView> $category
+     */
     public function __construct(
+        public int $id,
         private string $name,
-        private float $price,
     )
     {
     }
@@ -16,10 +21,5 @@ class ProductFixtureEntity
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function getPrice(): float
-    {
-        return $this->price;
     }
 }
