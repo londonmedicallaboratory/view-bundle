@@ -7,7 +7,7 @@ namespace LML\View\Lazy;
 /**
  * This should not be used outside of LazyValue class.
  *
- * @template T
+ * @template-covariant  T
  *
  * @internal
  * @psalm-internal LML\View\Lazy

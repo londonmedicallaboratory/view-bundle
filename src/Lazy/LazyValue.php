@@ -7,7 +7,7 @@ namespace LML\View\Lazy;
 use Closure;
 
 /**
- * @template T
+ * @template-covariant  T
  *
  * @implements LazyValueInterface<T>
  */
