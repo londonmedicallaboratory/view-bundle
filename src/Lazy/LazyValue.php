@@ -8,6 +8,8 @@ use Closure;
 
 /**
  * @template T
+ *
+ * @implements LazyValueInterface<T>
  */
 class LazyValue implements LazyValueInterface
 {
