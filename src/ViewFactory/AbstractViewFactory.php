@@ -35,7 +35,7 @@ abstract class AbstractViewFactory implements ViewFactoryInterface
 
     final public static function getDefaultName(): string
     {
-        return self::class;
+        return static::class;
     }
 
     /**
