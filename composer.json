@@ -1,6 +1,7 @@
 {
     "name": "londonmedicallaboratory/view-bundle",
     "type": "symfony-bundle",
+    "license": "MIT",
     "authors": [
         {
             "name": "zmitic",
