@@ -6,29 +6,31 @@ namespace LML\View\Lazy;
 
 use Closure;
 use Generator;
+use Traversable;
+use function array_values;
+use function iterator_to_array;
 
 /**
- * @template TKey
- * @template TValue
+ * @template T
  *
- * @implements LazyIterableInterface<TKey, TValue>
+ * @implements LazyIterableInterface<T>
  */
 class LazyIterable implements LazyIterableInterface
 {
     /**
-     * @var Store<iterable<TKey, TValue>>|null
+     * @var Store<iterable<array-key, T>>|null
      */
     private ?Store $store = null;
 
     /**
-     * @param Closure(): iterable<TKey, TValue> $callable
+     * @param Closure(): iterable<array-key, T> $callable
      */
     public function __construct(private Closure $callable)
     {
     }
 
     /**
-     * @param TValue $element
+     * @param T $element
      */
     public function contains($element): bool
     {
@@ -42,7 +44,7 @@ class LazyIterable implements LazyIterableInterface
     }
 
     /**
-     * @return iterable<TKey, TValue>
+     * @return iterable<array-key, T>
      */
     public function getValues()
     {
@@ -52,15 +54,25 @@ class LazyIterable implements LazyIterableInterface
     }
 
     /**
-     * @return Generator<TKey, TValue>
+     * @return Generator<array-key, T>
      */
     public function getIterator(): Generator
     {
         yield from $this->getValues();
     }
 
+    public function toList(): array
+    {
+        $values = $this->getValues();
+        if ($values instanceof Traversable) {
+            $values = iterator_to_array($values, false);
+        }
+
+        return array_values($values);
+    }
+
     /**
-     * @return Store<iterable<TKey, TValue>>
+     * @return Store<iterable<array-key, T>>
      */
     private function doGetStore(): Store
     {

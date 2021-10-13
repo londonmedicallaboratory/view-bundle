@@ -7,15 +7,19 @@ namespace LML\View\Lazy;
 use IteratorAggregate;
 
 /**
- * @template TKey
- * @template TValue
+ * @template T
  *
- * @extends IteratorAggregate<TKey, TValue>
+ * @extends IteratorAggregate<array-key, T>
  */
 interface LazyIterableInterface extends IteratorAggregate
 {
     /**
-     * @return iterable<TKey, TValue>
+     * @return iterable<array-key, T>
      */
     public function getValues();
+
+    /**
+     * @return list<T>
+     */
+    public function toList(): array;
 }
