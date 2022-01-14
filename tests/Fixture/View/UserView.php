@@ -12,8 +12,8 @@ class UserView
      * @param LazyValue<VideoView> $category
      */
     public function __construct(
-        public int $id,
         private string $name,
+        public int $id,
     )
     {
     }

@@ -16,6 +16,11 @@
         </ignoreFiles>
     </projectFiles>
 
+    <forbiddenFunctions>
+        <function name="dd"/>
+        <function name="dump"/>
+    </forbiddenFunctions>
+
     <stubs>
         <file name="stubs/Pagerfanta/Pagerfanta.stubphp"/>
         <file name="stubs/Pagerfanta/PagerfantaInterface.stubphp"/>

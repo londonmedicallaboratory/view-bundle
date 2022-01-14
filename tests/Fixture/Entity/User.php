@@ -9,9 +9,9 @@ use function sprintf;
 class User
 {
     public function __construct(
-        private int $id,
         private string $firstName,
         private string $lastName,
+        private int $id,
     )
     {
     }

@@ -24,7 +24,7 @@ class CollectionTest extends KernelTestCase
         $viewFactory = self::getContainer()->get(UserViewFactory::class);
         self::assertInstanceOf(UserViewFactory::class, $viewFactory);
 
-        $entity = new User('Test', 42);
+        $entity = new User('John', 'Connor', 42);
         /** @var UserView $view */
         $view = $viewFactory->buildOne($entity);
         self::assertInstanceOf(UserView::class, $view);

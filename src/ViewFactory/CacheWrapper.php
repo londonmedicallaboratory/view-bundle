@@ -47,6 +47,11 @@ class CacheWrapper
                 $entityKey = $this->generateEntityKey($taggedEntity);
                 $item->tag($entityKey);
             }
+            foreach ($context->getEntityClasses() as $entityClass) {
+                $key = ClassUtils::getRealClass($entityClass);
+                $key = str_replace('\\', '', $key);
+                $item->tag($key);
+            }
 
             return $results;
         });
@@ -56,6 +61,9 @@ class CacheWrapper
     {
         $key = $this->generateEntityKey($entity);
         $this->tagAwareCache->invalidateTags([$key]);
+
+        $class = $this->getRealClassNameCacheableInterface($entity);
+        $this->tagAwareCache->invalidateTags([$class]);
     }
 
     /**
@@ -63,10 +71,16 @@ class CacheWrapper
      */
     private function generateEntityKey(CacheableInterface $taggedEntity): string
     {
-        $className = ClassUtils::getClass($taggedEntity); // remove Proxy from name
-        $className = str_replace('\\', '', $className); // remove reserved characters like `\`
+        $className = $this->getRealClassNameCacheableInterface($taggedEntity);
         $id = $taggedEntity->getBaseName();
 
         return sprintf('%s-%s', $className, $id);
+    }
+
+    private function getRealClassNameCacheableInterface(CacheableInterface $taggedEntity): string
+    {
+        $className = ClassUtils::getClass($taggedEntity); // remove Proxy from name
+
+        return str_replace('\\', '', $className); // remove reserved characters like `\`
     }
 }

@@ -3,8 +3,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    LML\View\Tests\Fixture\ViewFactory\ProductViewFactoryFixture:
-    LML\View\Tests\Fixture\ViewFactory\CategoryViewFactoryFixture:
+    LML\View\Tests\Fixture\ViewFactory\UserViewFactory:
+    LML\View\Tests\Fixture\ViewFactory\VideoViewFactory:
 
 
 framework:
@@ -16,6 +16,3 @@ framework:
 
 lml_view:
     cache_pool: test_pool
-
-
-

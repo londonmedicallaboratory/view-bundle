@@ -35,7 +35,7 @@ class TestKernel extends Kernel implements CompilerPassInterface
     public function process(ContainerBuilder $container): void
     {
         foreach ($container->getDefinitions() as $id => $definition) {
-            if (str_starts_with((string)$id, 'lml_view.')) {
+            if (str_starts_with($id, 'lml_view.')) {
                 $definition->setPublic(true);
             }
         }

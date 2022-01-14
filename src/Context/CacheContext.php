@@ -13,9 +13,22 @@ class CacheContext
 
     private ?int $expiresAfter = null;
 
+    /**
+     * @var list<class-string>
+     */
+    private array $entityClasses = [];
+
     public function watch(CacheableInterface $entity): void
     {
         $this->taggedEntities[] = $entity;
+    }
+
+    /**
+     * @param class-string $className
+     */
+    public function watchClass(string $className): void
+    {
+        $this->entityClasses[] = $className;
     }
 
     /**
@@ -34,5 +47,13 @@ class CacheContext
     public function expiresAfter(?int $expiresAfter): void
     {
         $this->expiresAfter = $expiresAfter;
+    }
+
+    /**
+     * @return list<class-string>
+     */
+    public function getEntityClasses(): array
+    {
+        return $this->entityClasses;
     }
 }

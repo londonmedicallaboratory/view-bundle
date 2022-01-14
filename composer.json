@@ -18,12 +18,13 @@
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
-        "vimeo/psalm": "^4.9",
+        "vimeo/psalm": "dev-master",
         "psalm/plugin-symfony": "^2.4",
         "symfony/phpunit-bridge": "^5.0",
         "symfony/framework-bundle": "^5.0",
         "symfony/yaml": "^5.0",
-        "doctrine/orm": "^2.9"
+        "doctrine/orm": "^2.9",
+        "symfony/maker-bundle": "^1.36"
     },
     "autoload": {
         "psr-4": {

@@ -16,11 +16,11 @@ use LML\View\ViewFactory\AbstractViewFactory;
  */
 class UserViewFactory extends AbstractViewFactory
 {
-    protected function one($entity, $options, $optimizer)
+    protected function one($entity, $options, $optimizer): UserView
     {
         return new UserView(
-            id: $entity->getId(),
             name: 'John Doe',
+            id: $entity->getId(),
         );
     }
 
