@@ -21,7 +21,7 @@ class TestKernel extends Kernel implements CompilerPassInterface
         parent::__construct('test', true);
     }
 
-    public function registerBundles()
+    public function registerBundles(): iterable
     {
         yield new FrameworkBundle();
         yield new LMLViewBundle();

@@ -7,12 +7,9 @@ namespace LML\View\ViewFactory;
 use Closure;
 use Traversable;
 use RuntimeException;
-use Doctrine\ORM\Query;
-use Pagerfanta\Pagerfanta;
 use LML\View\Context\CacheContext;
 use LML\View\Lazy\LazyValueInterface;
 use LML\View\Context\CacheableInterface;
-use LML\View\Pagination\QueryViewAdapter;
 use function iterator_to_array;
 
 /**
@@ -68,22 +65,6 @@ abstract class AbstractViewFactory implements ViewFactoryInterface
         return $results;
     }
 
-    /**
-     * @param TOptions $options
-     *
-     * @return Pagerfanta<TView>
-     */
-    final public function paginate(Query $query, int $page, $options = [], int $maxPerPage = 10): Pagerfanta
-    {
-        $adapter = new QueryViewAdapter($query, $this, $options);
-
-        $pagerfanta = new Pagerfanta($adapter);
-        $pagerfanta->setMaxPerPage($maxPerPage);
-        $pagerfanta->setCurrentPage($page);
-
-        return $pagerfanta;
-    }
-
     final public function setViewFactoriesCollection(ViewFactoryCollection $viewFactoriesCollection): void
     {
         $this->viewFactoriesCollection = $viewFactoriesCollection;
@@ -119,12 +100,12 @@ abstract class AbstractViewFactory implements ViewFactoryInterface
      * @template TResult
      * @template TBaseEntity of CacheableInterface
      *
-     * @param TBaseEntity $entity
+     * @see Context
      * @param Closure(CacheContext, TBaseEntity): TResult $callback
      *
+     * @param TBaseEntity $entity
      * @return TResult
      *
-     * @see Context
      */
     final protected function fromCache(string $key, CacheableInterface $entity, Closure $callback)
     {
