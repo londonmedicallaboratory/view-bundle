@@ -46,7 +46,7 @@ class LazyIterable implements LazyIterableInterface
     /**
      * @return iterable<array-key, T>
      */
-    public function getValues()
+    public function getValues(): iterable
     {
         $store = $this->store ?? $this->doGetStore();
 

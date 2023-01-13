@@ -18,6 +18,11 @@ class ResolvedValue implements LazyValueInterface
     {
     }
 
+    public function isEvaluated(): bool
+    {
+        return true;
+    }
+
     public function getValue()
     {
         return $this->value;

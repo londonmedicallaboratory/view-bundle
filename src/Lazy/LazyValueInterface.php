@@ -13,4 +13,6 @@ interface LazyValueInterface
      * @return T
      */
     public function getValue();
+
+    public function isEvaluated(): bool;
 }

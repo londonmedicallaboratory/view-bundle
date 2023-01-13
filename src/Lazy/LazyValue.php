@@ -25,6 +25,11 @@ class LazyValue implements LazyValueInterface
     {
     }
 
+    public function isEvaluated(): bool
+    {
+        return (bool)$this->store;
+    }
+
     public function __toString(): string
     {
         return (string)$this->getValue();
