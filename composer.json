@@ -1,44 +1,44 @@
 {
-  "name": "londonmedicallaboratory/view-bundle",
-  "type": "symfony-bundle",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "zmitic",
-      "email": "mitke013@gmail.com"
+    "name": "londonmedicallaboratory/view-bundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "zmitic",
+            "email": "mitke013@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "symfony/http-kernel": "^5.4|^6.0",
+        "symfony/http-client": "^5.4|^6.0",
+        "endroid/installer": "^1.3",
+        "pagerfanta/pagerfanta": "^3.2",
+        "doctrine/common": "^3.1"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "vimeo/psalm": "dev-master as 5.18.0",
+        "psalm/plugin-symfony": "^5",
+        "symfony/phpunit-bridge": "^5.5|^6.0",
+        "symfony/framework-bundle": "^5.4|^6.0",
+        "symfony/yaml": "^5.4|^6.0",
+        "symfony/maker-bundle": "^1.36"
+    },
+    "autoload": {
+        "psr-4": {
+            "LML\\View\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LML\\View\\Tests\\": "tests",
+            "LML\\View\\Fixture\\": "tests\\fixtures"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "endroid/installer": true
+        }
     }
-  ],
-  "require": {
-    "php": "^8.0",
-    "symfony/http-kernel": "^5.4|^6.0",
-    "symfony/http-client": "^5.4|^6.0",
-    "endroid/installer": "^1.3",
-    "pagerfanta/pagerfanta": "^3.2",
-    "doctrine/common": "^3.1"
-  },
-  "require-dev": {
-    "roave/security-advisories": "dev-latest",
-    "vimeo/psalm": "^4.23",
-    "psalm/plugin-symfony": "^2.4",
-    "symfony/phpunit-bridge": "^5.5|^6.0",
-    "symfony/framework-bundle": "^5.4|^6.0",
-    "symfony/yaml": "^5.4|^6.0",
-    "symfony/maker-bundle": "^1.36"
-  },
-  "autoload": {
-    "psr-4": {
-      "LML\\View\\": "src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "LML\\View\\Tests\\": "tests",
-      "LML\\View\\Fixture\\": "tests\\fixtures"
-    }
-  },
-  "config": {
-    "allow-plugins": {
-      "endroid/installer": true
-    }
-  }
 }

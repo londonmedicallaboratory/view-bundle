@@ -93,7 +93,9 @@ abstract class AbstractViewFactory implements ViewFactoryInterface
      */
     final protected function get(string $id): ViewFactoryInterface
     {
-        return $this->viewFactoriesCollection?->get($id) ?? throw new RuntimeException('DI failure.');
+        $viewFactoryCollection = $this->viewFactoriesCollection ?? throw new RuntimeException('DI failure.');
+
+        return $viewFactoryCollection->get($id);
     }
 
     /**
